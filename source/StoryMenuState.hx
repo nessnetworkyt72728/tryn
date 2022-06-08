@@ -66,13 +66,49 @@ class StoryMenuState extends MusicBeatState
 		txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
 		txtWeekTitle.alpha = 0.7;
 		
-	       var txtWeekTitle:FlxText;
+	        var txtWeekTitle:FlxText;
 
-	       var curWeek:Int = 0;
-	       var weekSprites:FlxSprite;
-	       var synth:FlxSound;
-	       var drums:FlxSound;
-	       var txtTracklist:FlxText;
+	        var curWeek:Int = 0;
+	        var weekSprites:FlxSprite;
+	        var synth:FlxSound;
+	        var drums:FlxSound;
+	        var txtTracklist:FlxText;
+
+	        var grpWeekText:FlxTypedGroup<MenuItem>;
+	
+
+	        var grpLocks:FlxTypedGroup<FlxSprite>;
+
+	        var difficultySelectors:FlxGroup;
+	        var sprDifficulty:FlxSprite;
+	        var leftArrow:FlxSprite;
+	        var rightArrow:FlxSprite;
+	        var debug:Bool = false;
+	        override function create()
+	      {
+		#if debug
+		debug = true;
+		#end
+		transIn = FlxTransitionableState.defaultTransIn;
+		transOut = FlxTransitionableState.defaultTransOut;
+
+		for(i in 0...7){
+			FlxG.sound.cache(Paths.music('drumloop' + i));
+		}
+
+		//if (FlxG.sound.music != null)
+		//{
+		//	if (!FlxG.sound.music.playing)
+		//		FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		//}
+		synth = new FlxSound().loadEmbedded(Paths.music('synthloop'),true);
+		drums = new FlxSound();
+		synth.play();
+		FlxG.sound.list.add(drums);
+		FlxG.sound.list.add(synth);
+		
+		//if (FlxG.save.data.weekUnlocked != null) weekUnlocked = FlxG.save.data.weekUnlocked;
+	
 		
 		var rankText:FlxText = new FlxText(0, 10);
 		rankText.text = 'RANK: GREAT';
