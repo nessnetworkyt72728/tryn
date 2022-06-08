@@ -87,6 +87,20 @@ class StoryMenuState extends MusicBeatState
 
 		grpLocks = new FlxTypedGroup<FlxSprite>();
 		add(grpLocks);
+		
+		for(i in 0...7){
+			FlxG.sound.cache(Paths.music('drumloop' + i));
+		}
+
+		//if (FlxG.sound.music != null)
+		//{
+		//	if (!FlxG.sound.music.playing)
+		//		FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		//}
+		synth = new FlxSound().loadEmbedded(Paths.music('synthloop'),true);
+		drums = new FlxSound();
+		synth.play();
+		FlxG.sound.list.add(drums);
 
 		#if desktop
 		// Updating Discord Rich Presence
